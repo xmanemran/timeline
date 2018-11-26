@@ -1,71 +1,120 @@
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {FlatList, View, StyleSheet, Text} from 'react-native';
 
 export default class Timeline extends Component {
-  render() {
-    return (
-      <View style={styles.container}>
-
-        {this.box()}
-        {this.box()}
-        {this.box(0)}
-      </View>
-    );
-  }
-
-  box(border = 1) {
-    return (
-      <View style={{flexDirection: 'row', alignItems: 'center', minHeight: 80,}}>
-        <View style={{marginRight: 20, minWidth: 50,}}>
-          <Text style={{textAlign: 'center'}}>12:28 PM</Text>
-        </View>
-        <View style={{height: '100%'}}>
-          <View style={{borderLeftWidth: border, borderLeftColor: '#EDEDED', flex: 1, top: '50%'}}>
-            {this.icon()}
-          </View>
-        </View>
-        <View style={{paddingLeft: 30}}>
-          <Text style={{fontSize: 13, color: '#313131'}}>Order has been placed successfully</Text>
-        </View>
-      </View>
-
-    )
-  }
-
-  icon() {
-    return (
-      <View style={{
-        width: 20,
-        position: 'absolute',
-        left: -10,
-        top: -10,
-        height: 20,
-        backgroundColor: '#6CE25D',
-        borderRadius: 10,
-        justifyContent: 'center',
-        alignItems: 'center'
-      }}>
-        <View style={{width: 16,height: 16, backgroundColor: '#  ', borderRadius: 8, borderWidth: 3, borderColor: '#FFF'}}/>
-      </View>
-    )
-  }
+	
+	render() {
+		const {data} = this.props;
+		return (
+			<View style={styles.container}>
+				{this.item(data[2], 2)}
+				{this.item(data[1], 1)}
+				{this.item(data[0], 0)}
+			</View>
+		);
+	}
+	
+	item = ({leftContent, rightContent}, index) => {
+		return (
+			<View style={styles.boxRoot}>
+				{this.leftItem(leftContent)}
+				{this.line(index)}
+				{this.rightItem(rightContent)}
+			</View>
+		
+		)
+	}
+	
+	line(border = 1){
+		return (
+			<View style={styles.lineRoot}>
+				<View style={[styles.line, {borderLeftWidth: +!!border}]}>
+					{this.iconHolder()}
+				</View>
+			</View>
+		)
+	}
+	
+	leftItem(leftContent){
+		return (
+			<View style={styles.leftItem}>
+				{leftContent}
+			</View>
+		)
+	}
+	
+	rightItem(rightContent){
+		return (
+			<View style={styles.rightItemRoot}>
+				{rightContent}
+			</View>
+		)
+	}
+	
+	iconHolder() {
+		return (
+			<View style={styles.iconRoot}>
+				{this.icon()}
+			</View>
+		)
+	}
+	
+	icon(){
+		return (
+			<View style={styles.icon}>
+				<View style={styles.activeIcon}/>
+			</View>
+		)
+	}
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+	container: {
+		backgroundColor: '#FFF',
+	},
+	boxRoot: {
+		flexDirection: 'row',
+	},
+	leftItem: {
+		minWidth: 50,
+		marginRight: 30,
+		paddingTop: 20,
+		paddingBottom: 20,
+	},
+	lineRoot: {
+		height: '100%',
+		alignItems: 'center'
+	},
+	line: {
+		borderLeftWidth: 1,
+		position: 'absolute',
+		borderLeftColor: '#EDEDED',
+		height: '100%',
+		top: 20,
+	},
+	rightItemRoot: {
+		marginLeft: 25,
+		paddingTop: 20,
+		paddingBottom: 20,
+		flex: 1,
+	},
+	iconRoot: {
+		left: -10,
+	},
+	icon: {
+		width: 20,
+		height: 20,
+		backgroundColor: '#6CE25D',
+		borderRadius: 10,
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	activeIcon: {
+		width: 16,
+		height: 16,
+		backgroundColor: '#6CE25D',
+		borderRadius: 8,
+		borderWidth: 3,
+		borderColor: '#FFF'
+	}
 });

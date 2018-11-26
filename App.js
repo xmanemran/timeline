@@ -6,7 +6,24 @@ export default class App extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Timeline />
+        <Timeline data={[
+	        {
+		        leftContent: <Text style={{width: 80, textAlign: 'center'}}>10/12/2018 08:02</Text>,
+		        rightContent:  <Text>10/12/2018 08:02</Text>
+	        },
+	        {
+		        leftContent: <Text style={{width: 80, textAlign: 'center'}}>10/12/2018 08:02</Text>,
+		        rightContent:  (
+		            <Text>
+			            Wes Bos is a Full Stack Developer, Speaker and Teacher from Canada. He is a course creator, works as an independent web developer and is the co-host of Syntax - a popular web development podcast. Wes has taught over 500 students in 200+ classes and spoken at dozens of conferences around the world. Wes wrote his own bio in the third person for some reason.Wes Bos is a Full Stack Developer, Speaker and Teacher from Canada. He is a course creator, works as an independent web developer and is the co-host of Syntax - a popular web development podcast. Wes has taught over 500 students in 200+ classes and spoken at dozens of conferences around the world. Wes wrote his own bio in the third person for some reason.
+                    </Text>
+                )
+	        },
+	        {
+		        leftContent: <Text style={{width: 80, textAlign: 'center'}}>10/12/2018 08:02</Text>,
+		        rightContent:  <Text>Hello</Text>
+	        }
+        ]}/>
       </View>
     );
   }
@@ -15,8 +32,6 @@ export default class App extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
   welcome: {
